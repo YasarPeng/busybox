@@ -1,0 +1,22 @@
+services:
+  # 多功能调试工具容器
+  debug-tools:
+    image: multi-tool-debug:latest
+    container_name: debug-tools
+    restart: "no"
+    command: /bin/bash
+    tty: true
+    stdin_open: true
+    volumes:
+      - ./configs:/workspace/configs
+      - ./logs:/workspace/logs
+      - ~/.mc:/root/.mc # MinIO 客户端配置
+    networks:
+      - debug-net
+    environment:
+      - TZ=Asia/Shanghai
+    # 如需使用网络调试工具，取消注释以下行
+    # privileged: true
+    # cap_add:
+    #   - NET_ADMIN
+    #   - NET_RAW
