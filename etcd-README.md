@@ -171,19 +171,20 @@ fi
 
 ## 环境变量配置
 
-| 变量名 | 说明 | 示例 |
-|--------|------|------|
-| `ETCDCTL_ENDPOINTS` | etcd 端点列表 | `http://localhost:2379` |
-| `ETCDCTL_CACERT` | CA 证书路径 | `/etc/ssl/etcd/ca.crt` |
-| `ETCDCTL_CERT` | 客户端证书路径 | `/etc/ssl/etcd/client.crt` |
-| `ETCDCTL_KEY` | 客户端私钥路径 | `/etc/ssl/etcd/client.key` |
-| `ETCDCTL_API` | API 版本 | `3` |
+| 变量名                | 说明           | 示例                         |
+| --------------------- | -------------- | ---------------------------- |
+| `ETCDCTL_ENDPOINTS` | etcd 端点列表  | `http://localhost:2379`    |
+| `ETCDCTL_CACERT`    | CA 证书路径    | `/etc/ssl/etcd/ca.crt`     |
+| `ETCDCTL_CERT`      | 客户端证书路径 | `/etc/ssl/etcd/client.crt` |
+| `ETCDCTL_KEY`       | 客户端私钥路径 | `/etc/ssl/etcd/client.key` |
+| `ETCDCTL_API`       | API 版本       | `3`                        |
 
 ## 故障排除
 
 ### 常见错误
 
 1. **连接被拒绝**
+
    ```bash
    # 检查 etcd 是否运行
    etcdctl endpoint health
@@ -191,8 +192,8 @@ fi
    # 检查网络连接
    telnet etcd.example.com 2379
    ```
-
 2. **TLS 证书错误**
+
    ```bash
    # 验证证书路径
    ls -la $ETCDCTL_CACERT $ETCDCTL_CERT $ETCDCTL_KEY
@@ -200,8 +201,8 @@ fi
    # 使用 --insecure-skip-tls-verify 临时跳过验证（仅测试）
    etcdctl --insecure-skip-tls-verify endpoint health
    ```
-
 3. **权限不足**
+
    ```bash
    # 检查数据目录权限
    ls -la /var/lib/etcd
