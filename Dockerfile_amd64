@@ -51,11 +51,11 @@ RUN apk add --no-cache mariadb-connector-c
 # 安装 RabbitMQ 客户端工具
 RUN apk add --no-cache rabbitmqctl || true
 
-# 安装 MinIO 客户端 (mc)
+# 安装 MinIO 客户端 (mc) - AMD64版本
 RUN curl -sSL https://dl.min.io/client/mc/release/linux-amd64/mc -o /usr/local/bin/mc \
     && chmod +x /usr/local/bin/mc
 
-# 安装 etcdctl 工具
+# 安装 etcdctl 工具 - AMD64版本
 RUN curl -sSL https://github.com/etcd-io/etcd/releases/download/v3.5.25/etcd-v3.5.25-linux-amd64.tar.gz -o etcd.tar.gz \
     && tar -xzvf etcd.tar.gz --strip-components=1 -C /usr/local/bin etcd-v3.5.25-linux-amd64/etcdctl \
     && rm etcd.tar.gz \
@@ -68,4 +68,3 @@ COPY ./apps /apps/
 
 # 设置默认命令
 CMD ["/bin/bash"]
-
