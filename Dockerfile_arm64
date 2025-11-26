@@ -78,5 +78,5 @@ WORKDIR /apps
 COPY ./apps /apps/
 
 # 设置默认命令
-CMD ["/bin/bash"]
+ENTRYPOINT ["/bin/bash"]
 

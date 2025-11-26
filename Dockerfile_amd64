@@ -85,4 +85,4 @@ RUN echo '# 显示欢迎语句' > /root/.bashrc \
     && echo '' >> /root/.bashrc
 
 # 设置默认命令
-CMD ["/bin/bash"]
+ENTRYPOINT ["/bin/bash"]
