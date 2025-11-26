@@ -9,6 +9,9 @@ LABEL maintainer="pengyongshi" \
 # 设置环境变量
 ENV TZ=Asia/Shanghai
 
+# 设置主机名
+ENV HOSTNAME=laiye-tools-debug
+
 # 安装所有必需的包，合并为单层以减小镜像大小
 RUN apk add --no-cache \
     # 基础工具
@@ -53,6 +56,21 @@ RUN curl -sSL https://github.com/etcd-io/etcd/releases/download/v3.5.25/etcd-v3.
     && tar -xzvf etcd.tar.gz --strip-components=1 -C /usr/local/bin etcd-v3.5.25-linux-arm64/etcdctl \
     && rm etcd.tar.gz \
     && chmod +x /usr/local/bin/etcdctl
+# 添加欢迎语句到motd
+RUN echo '' > /etc/motd \
+    && echo '🔧 欢迎使用 laiye-tools-debug 调试工具箱！' >> /etc/motd \
+    && echo '📦 包含工具: MySQL客户端, Redis, RabbitMQ, MinIO, etcdctl, 网络诊断工具' >> /etc/motd \
+    && echo '🌐 网络模式: Host' >> /etc/motd \
+    && echo '🚀 开始您的调试工作吧！' >> /etc/motd \
+    && echo '' >> /etc/motd
+
+# 创建 .bashrc 来显示欢迎语句
+RUN echo '# 显示欢迎语句' > /root/.bashrc \
+    && echo 'if [ -f /etc/motd ]; then' >> /root/.bashrc \
+    && echo '    cat /etc/motd' >> /root/.bashrc \
+    && echo 'fi' >> /root/.bashrc \
+    && echo '' >> /root/.bashrc
+
 
 # 创建工作目录
 WORKDIR /apps
